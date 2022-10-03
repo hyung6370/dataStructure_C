@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #define COMPARE(x, y) (((x) < (y)) ? -1 : ((x) == (y)) ? 0 : 1)
-#define MAX_DEGREE 101
 #define MAX_TERMS 10000
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -10,7 +9,6 @@ typedef struct {
     float coef;
     int expon;
 } Polynomial;
-
 
 int avail = 0;
 
@@ -66,11 +64,9 @@ void pmul(int startA, int finishA, int startB, int finishB, int *startD, int *fi
             exponent = terms[i].expon + terms[j].expon;
             s = finishA + finishB;
             attach_mul(coefficient, exponent, s);
-            
         }
     }
     *finishD = avail - 1;
-
 }
 
 void attach(float coefficient, int exponent) {
@@ -97,9 +93,7 @@ void attach_mul(float coefficient, int exponent, int s) {
             avail++;
             return;
         }
-        else { 
-            break;
-        }
+        else break;
     }
     avail++;
     terms[avail].coef = coefficient;
@@ -107,13 +101,11 @@ void attach_mul(float coefficient, int exponent, int s) {
 }
 
 int main() {
-    int i = 0;
-    int j = 0;
+    int i = 0, j = 0;
     int startA, startB, startD;
     int finishA, finishB, finishD;
     int temp;
-    int count1 = 0;
-    int count2 = 0;
+    int count1 = 0, count2 = 0;
     int choiceOp;
     float input_coef;
     int input_expon;
