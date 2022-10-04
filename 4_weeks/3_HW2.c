@@ -18,6 +18,7 @@ void padd(int startA, int finishA, int startB, int finishB, int *startD, int *fi
 void pmul(int startA, int finishA, int startB, int finishB, int *startD, int *finishD);
 void attach(float coefficient, int exponent);
 void attach_mul(float coefficient, int exponent, int s);
+void print_poly(int start, int finish);
 
 void padd(int startA, int finishA, int startB, int finishB, int *startD, int *finishD) {
     float coefficient;
@@ -98,6 +99,46 @@ void attach_mul(float coefficient, int exponent, int s) {
     avail++;
     terms[avail].coef = coefficient;
     terms[avail++].expon = exponent;
+}
+
+void print_poly(int start, int finish) {
+    int i = start;
+    int j = finish;
+
+    for(i = start; i <= j; i++) {
+        if(terms[i].coef >= 0 && i == start && terms[i].expon !=0) {
+        // 계수가 양수이고 첫항
+        // 이고 지수가 0이 아니면
+            printf("%.2f",terms[i].coef);
+            printf("x^");
+            printf("%d ",terms[i].expon);
+        }
+        else if(terms[i].coef >= 0 && terms[i].expon !=0) {
+        // 계수가 양수이고 지수가 0이
+        // 아니고 첫항이 아니면
+            printf("+%.2f",terms[i].coef);
+            printf("x^");
+            printf("%d ",terms[i].expon);
+        }
+        else if(terms[i].coef < 0 && terms[i].expon !=0) {
+        // 계수가 음수이고 지수가 0이 아니면
+            printf("%.2f",terms[i].coef);
+            printf("x^");
+            printf("%d ",terms[i].expon);
+        }
+        else if(terms[i].coef > 0 && terms[i].expon == 0) {
+        // 계수가 양수이고 지수가 0이면
+            printf("+ %.2f",terms[i].coef);
+            break;
+        }
+        else if(terms[i].coef < 0 && terms[i].expon == 0) {
+        // 계수가 음수이고 지수가 0이면
+            printf("%.2f",terms[i].coef);
+            break;
+        }
+    }
+    printf("\n");
+    // return 0;
 }
 
 int main() {
@@ -181,6 +222,8 @@ int main() {
             printf("\tcoef\t\texpon\t\n");
             for (int k = startD; k <= finishD; k++)
                 printf("\t%.2f\t\t%d\t\n", terms[k].coef, terms[k].expon);
+            print_poly(startD, finishD);
+            printf("\n");
         }
 
         printf("\n다항식 곱셈 결과 : D(x)\n");
@@ -188,7 +231,7 @@ int main() {
         for (int i = startD; i <= finishD; i++) {
             printf("\t%.2f\t\t%d\t\n", terms[i].coef, terms[i].expon);
         }
-
+        print_poly(startD, finishD);
     }
     
 }
