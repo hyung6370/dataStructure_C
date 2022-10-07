@@ -12,6 +12,10 @@ struct point p;
 
 void file_read();
 
+void op_distance(double pointX, double pointY) {
+    int init_cPoint;
+}
+
 void file_read() {
     FILE *f;	
     f = fopen("p1.txt","r");		
@@ -26,11 +30,11 @@ void file_read() {
     for (int i = 1; i <= p.num; i++) {
         printf("%lf %lf\n", p.pointX[i], p.pointY[i]);
     }
+
+    // op_distance(p.pointX[1], p.pointY[1]);
 }
 
-void op_distance(double init_cPoint) {
-    
-}
+
 
 int main() {
     char file_name[30];
@@ -41,5 +45,5 @@ int main() {
     scanf(" %d", &kNum);
 	file_read();
     printf("\n\n");
-    printf("kNum : %d\n", kNum);
+    printf("pointX[1] pointY[1] : %lf %lf\n", p.pointX[1], p.pointY[1]);
 }
