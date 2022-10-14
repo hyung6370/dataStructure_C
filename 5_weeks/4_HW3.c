@@ -46,6 +46,7 @@ void printQueue() {
     printf("    index : item\n");
     for (int i = front+1; i <= rear; i++) {
         printf("\t%d :  %d\n", i, queue[i]);
+        printf("front : %d, rear : %d\n", front, rear);
     }
     printf("\n");
 }

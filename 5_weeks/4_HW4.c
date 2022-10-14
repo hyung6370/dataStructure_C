@@ -16,7 +16,6 @@ typedef struct {
     int rear;
 } Queue;
 
-
 void init_stack(Stack* s) {
     s->top = -1;
     s->capacity_stack = 2;
@@ -55,8 +54,8 @@ void queueFull(Queue* q) {
             newQueue[q->capacity_queue - start + i] = q->queueData[i];
         }
     }
-    q->front = 2 * q->capacity_queue - 1;
-    q->rear = q->capacity_queue - 1;
+    q->front = 2 * q->capacity_queue - 2;
+    q->rear = 2 * q->capacity_queue - 1;
     q->capacity_queue *= 2;
     free(q->queueData);
     q->queueData = newQueue;
@@ -119,12 +118,13 @@ void printStack(Stack* s) {
 }
 
 void printQueue(Queue* q) {
+    printf("front : %d, rear : %d\n", q->front, q->rear);
     printf("    index : item\n");
-    for (int i = q->front+1; i <= q->rear; i++) {
+    for (int i = 0; i <= q->rear; i++) {
         printf("\t%d :  %d\n", i, q->queueData[i]);
     }
     printf("\n");
-}
+} 
 
 int main() {
     int firstChoiceNum;
