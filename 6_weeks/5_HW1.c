@@ -172,7 +172,10 @@ char print_token(precedence token) {
 int main() {
     printf("Infix : ");
     scanf("%s", expr);
+    printf("Infix to Postfix :\n");
     postfix(expr, new_expr);
+    printf("Token | Stack\n");
+    
     // printf("Infix to Postfix :\n");
     // printf("  Token | Stack \n");
     for (int i = 0; i <= top; i++) {
