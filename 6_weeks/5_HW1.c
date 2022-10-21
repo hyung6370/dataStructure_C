@@ -19,7 +19,7 @@ typedef enum {
 
 static int isp[] = { 0, 19, 12, 12, 13, 13, 13, 0 }; // 스택 내 우선순위
 static int icp[] = { 20, 19, 12, 12, 13, 13, 13, 0 }; // 입력 될 때 우선순위
-
+    
 int stack[MAX_STACK_SIZE]; // global stack
 char expr[MAX_EXPR_SIZE];  // input string
 char new_expr[MAX_STACK_SIZE];
