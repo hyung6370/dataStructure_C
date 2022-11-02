@@ -52,6 +52,20 @@ node* search(node *head, int data) {
     }
 }
 
+node* invert(node *head) {
+    node *pre = NULL;
+    node *cur = head;
+
+    while (cur != NULL) {
+        node *next = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = next;
+    }
+    head = pre;
+    return head;
+}
+
 node* delete_front(node *head) {
     node *ptr = NULL;
     if (head != NULL) {
@@ -97,6 +111,8 @@ node* delete_(node *head, int data) {
     }
 }
 
+
+
 void print_list(node* head) {
     node *ptr = NULL;
     ptr = head;
@@ -121,6 +137,7 @@ int main() {
         printf(" 3. delete_front\n");
         printf(" 4. delete_\n");
         printf(" 5. search\n");
+        printf(" 6. invert\n");
         printf("-1. exit\n");
         printf("어떤 기능을 수행할까요? : ");
         scanf("%d", &choiceNum);
@@ -160,6 +177,12 @@ int main() {
                 printf("데이터 : ");
                 scanf("%d", &operationData);
                 search(A, operationData);
+                print_list(A);
+                break;
+
+            case 6:
+                printf("역순 데이터 : ");
+                A = invert(A);
                 print_list(A);
                 break;
 
