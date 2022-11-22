@@ -142,6 +142,7 @@ treePointer make_bst(int n) {
     srand((unsigned int)time(NULL));
     for (int i = 0; i < n; i++) {
         keys[i] = ((rand() % n + 1) / (0x7fff * 1.0)) * 100000000;
+        // keys[i] = (rand() / (0x7fff * 1.0)) * 100000000;
         for (int j = 0; j < i; j++) {
             if (keys[i] == keys[j]) {
                 i--;

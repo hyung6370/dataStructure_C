@@ -1,6 +1,71 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define _CRT_SECURE_NO_WARNINGS
+
+typedef struct Info {
+    int arr_time;
+    int work_amount;
+    int priority_rank;
+} Info;
+
+typedef struct FIFO_info {
+    int work_end_time;
+    int exe_time;
+    int wait_time;
+    float avg_exe_time;
+    float avg_wait_time;
+} FIFO_info;
+
+Info* process_info;
+
+int num_of_works;
+
+void file_read() {
+    char fname;   
+
+    printf("입력파일 이름? ");
+    scanf("%s", &fname);
+
+    FILE *f = fopen(&fname, "r");
+    fscanf(f, "%d", &num_of_works);
+
+    process_info = (Info*)malloc(sizeof(Info)*num_of_works);
+
+    for (int i = 1; i <= num_of_works; i++) {
+        fscanf(f, "%d %d %d", &process_info[i].arr_time, &process_info[i].work_amount, &process_info[i].priority_rank);
+    }
+}
+
+void FIFO_ops() {
+    FIFO_info* f_op;
+    f_op = (FIFO_info*)malloc(sizeof(FIFO_info));
+
+    float exe_temp = 0;
+    float wait_temp = 0;
+    
+    f_op[1].work_end_time = process_info[1].arr_time + process_info[1].work_amount;
+    for (int i = 2; i <= num_of_works; i++) {
+        f_op[i].work_end_time += f_op[i-1].work_end_time + process_info[i].work_amount;
+    }
+    int end_time = f_op[num_of_works].work_end_time;
+
+    for (int i = 1; i <= num_of_works; i++) {
+        f_op[i].exe_time += f_op[i].work_end_time - process_info[i].arr_time;
+        exe_temp += f_op[i].exe_time;
+        f_op[i].wait_time += f_op[i].exe_time - process_info[i].work_amount;
+        wait_temp += f_op[i].wait_time;
+    }
+    f_op->avg_exe_time = exe_temp / num_of_works;
+    f_op->avg_wait_time = wait_temp / num_of_works;
+
+    printf("FIFO Scheduling의 실행 결과:\n");
+    printf("\t작업수 = %d, 종료시간 = %d, 평균 실행시간 = %.2f, 평균 대기시간 = %.2f\n", num_of_works, end_time, f_op->avg_exe_time, f_op->avg_wait_time);
+}
+
+
 
 int main() {
-    
+    file_read();
+    FIFO_ops();
+    return 0;
 }
