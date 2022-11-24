@@ -12,20 +12,17 @@ typedef struct FIFO_info {
     int work_end_time;
     int exe_time;
     int wait_time;
-    float avg_exe_time;
-    float avg_wait_time;
+    double avg_exe_time;
+    double avg_wait_time;
 } FIFO_info;
 
 typedef struct Priority_info {
-    int pri_start_time;
-    int pri_work_amount;
-    int priority_A;
-    int priority_B;
+    int work_end_time;
+    int exe_time;
+    int wait_time;
+    double avg_exe_time;
+    double avg_wait_time;
 } Priority_info;
-
-// typedef struct Queue {
-//     Queue *heap;
-// } Queue;
 
 Info* process_info;
 
@@ -42,61 +39,63 @@ int priority_check(Info A, Info B) {
 }
 
 void PRI_ops() {
-    Priority_info* p_op;
+    Priority_info* p_op = { 0 };
     p_op = (Priority_info*)malloc(sizeof(Priority_info));
 
     int start = process_info[1].arr_time;
-    int end_time = 0;
+    //int end_time = 0;
+    p_op->work_end_time = 0;
 
     for (int i = 1; i <= num_of_works; i++) {
-        end_time += process_info[i].work_amount;
+        p_op->work_end_time += process_info[i].work_amount;
     }
-    end_time = end_time + start;
+    p_op->work_end_time = p_op->work_end_time + start;
     int i = 1;
-    while (start != end_time) {    
-        if (start == process_info[i].arr_time) {
+    while (start != p_op->work_end_time) {
+        for (int j = 1; j < num_of_works; j++) {
+            if (start == process_info[j].arr_time) {
 
+            }
         }
-
         start++;
     }
 }
 
 void file_read() {
-    char *fname = (char*)malloc(sizeof(char)*50);
+    char* fname = (char*)malloc(sizeof(char) * 50);
 
     printf("입력파일 이름? ");
     scanf("%s", fname);
 
-    FILE *f = fopen(fname, "r");
+    FILE* f = fopen(fname, "r");
     fscanf(f, "%d", &num_of_works);
 
-    process_info = (Info*)malloc(sizeof(Info)*num_of_works);
+    process_info = (Info*)malloc(sizeof(Info) * num_of_works);
 
     for (int i = 1; i <= num_of_works; i++) {
         fscanf(f, "%d %d %d", &process_info[i].arr_time, &process_info[i].work_amount, &process_info[i].priority_rank);
     }
 
     fclose(f);
+    // free(fname);
 }
 
 void FIFO_ops() {
-    FIFO_info* f_op;
+    FIFO_info* f_op = { 0 };
     f_op = (FIFO_info*)malloc(sizeof(FIFO_info));
 
     float exe_temp = 0;
     float wait_temp = 0;
-    
     f_op[1].work_end_time = process_info[1].arr_time + process_info[1].work_amount;
     for (int i = 2; i <= num_of_works; i++) {
-        f_op[i].work_end_time += f_op[i-1].work_end_time + process_info[i].work_amount;
+        f_op[i].work_end_time = f_op[i - 1].work_end_time + process_info[i].work_amount;
     }
     int end_time = f_op[num_of_works].work_end_time;
 
     for (int i = 1; i <= num_of_works; i++) {
-        f_op[i].exe_time += f_op[i].work_end_time - process_info[i].arr_time;
+        f_op[i].exe_time = f_op[i].work_end_time - process_info[i].arr_time;
         exe_temp += f_op[i].exe_time;
-        f_op[i].wait_time += f_op[i].exe_time - process_info[i].work_amount;
+        f_op[i].wait_time = f_op[i].exe_time - process_info[i].work_amount;
         wait_temp += f_op[i].wait_time;
     }
     f_op->avg_exe_time = exe_temp / num_of_works;
@@ -109,6 +108,6 @@ void FIFO_ops() {
 int main() {
     file_read();
     FIFO_ops();
-    // PRI_ops();
+    PRI_ops();
     return 0;
 }
