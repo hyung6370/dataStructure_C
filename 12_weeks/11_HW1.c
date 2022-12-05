@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define MAX_VERTICES 50
 
 typedef struct GraphType {
@@ -8,13 +7,12 @@ typedef struct GraphType {
     int adj_mat[MAX_VERTICES][MAX_VERTICES];
 } GraphType;
 
-
 // 그래프 초기화
 void init(GraphType* g) {
     int r, c;
     g->n = 0;
-    for(r = 0; r < MAX_VERTICES; r++) {
-        for(c = 0; c < MAX_VERTICES; c++) {
+    for (r = 0; r < MAX_VERTICES; r++) {
+        for (c = 0; c < MAX_VERTICES; c++) {
            g->adj_mat[r][c] = 99999;
            if (r == c) {
             g->adj_mat[r][c] = 0;
@@ -22,7 +20,6 @@ void init(GraphType* g) {
         }
     }
 }
-
 
 //정점 삽입
 void insert_vertex(GraphType* g, int v) {
@@ -35,7 +32,7 @@ void insert_vertex(GraphType* g, int v) {
 
 //간선 삽입
 void insert_edge(GraphType* g, int from, int to, int weight) {
-    if(from >= g->n || to >= g->n){
+    if (from >= g->n || to >= g->n){
         fprintf(stderr, "vertex key error");
         return;
     }
@@ -52,7 +49,7 @@ void print_adj_mat(GraphType* g) {
     printf("\n");
     for (int i = 0; i < g->n; i++){
         printf("\t[ %d]\t", i);
-        for(int j = 0; j < g->n; j++){
+        for (int j = 0; j < g->n; j++){
             printf(" %d\t", g->adj_mat[i][j]);
         }
         printf("\n");
@@ -69,7 +66,7 @@ int main() {
     printf("노드 수 (n) : ");
     scanf("%d", &nodeCount);
 
-    for(int i = 0; i < nodeCount; i++) {
+    for (int i = 0; i < nodeCount; i++) {
        insert_vertex(g, i);
     }
 
