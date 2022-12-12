@@ -65,6 +65,7 @@ int* array_random(int* list, int num) {
     return list;
 }
 
+// 삽입 정렬 제대로 정렬 되었는지 확인해주는 함수
 int sorted_check(int list[], int num) {
     for (int i = 0; i < num-1; i++) {
         if (list[i] > list[i+1]) {
