@@ -152,6 +152,8 @@ int main() {
             end = clock();
             quick_time = (double)(end - start) / CLOCKS_PER_SEC;
             printf("quick sort time : %f\n", quick_time);
+
+            // free(B);
         }
 
         if (menuChoice == 2) {
@@ -210,10 +212,6 @@ int main() {
             end = clock();
             quick_time = (double)(end - start) / CLOCKS_PER_SEC;
             printf("quick sort time : %f\n", quick_time);
-        }
-
-        else {
-            printf("잘못 입력하셨습니다\n");
         }
     }
 }
