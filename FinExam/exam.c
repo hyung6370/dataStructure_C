@@ -33,13 +33,7 @@ int main() {
     printf("트리 생성 후 검색, 삭제 연산이 가능합니다!\n\n");
 
     printf("n개의 노드를 가진 이진 검색 트리 생성 (n) : ");
-    // while (1) {
         scanf("%d", &inputNumOfNodes);
-
-        // if (inputNumOfNodes == -1) {
-        //     printf("\n종료합니다!\n");
-        //     break;
-        // }
         
         A = make_bst(inputNumOfNodes);
 
@@ -51,7 +45,6 @@ int main() {
 
         countLeaf = count_leaf(A);
         printf("이진검색트리 B의 단말노드 수 : %d\n\n", countLeaf);
-    // }
 
     while (1) {
         int choiceMenu;
@@ -232,80 +225,6 @@ void deleteNode(treePointer root, int key) {
     }
     free(p);
 }
-
-// int delete_(treePointer t, int key) {
-//     treePointer temp = t;
-//     treePointer parent = temp;
-//     treePointer delItem;
-
-//     while (temp->key != key) {
-//         parent = temp;
-
-//         if (temp->key < key) {
-//             temp = temp->rchild;
-//         }
-//         else temp = temp->lchild;
-//     }
-//     delItem = temp;
-
-//     if (temp->lchild == NULL && temp->rchild == NULL) {
-//         if (parent->lchild) {
-//             if (temp->key == parent->lchild->key) {
-//                 parent->lchild = NULL;
-//                 return 1;
-//             }
-//         }
-//         parent->rchild = NULL;
-//         printf("Key %d 삭제 완료\n", key);
-//         return 1;
-//     }
-
-//     else if (temp->lchild != NULL && temp->rchild != NULL) {
-//         temp = temp->lchild;
-//         if (temp->rchild == NULL) {
-//             delItem->key = temp->key;
-//             delItem->lchild = temp->lchild;
-//             printf("Key %d 삭제 완료\n", key);
-//         }
-
-//         while (1) {
-//             if (temp->rchild == NULL) {
-//                 delItem->key = temp->key;
-//                 parent->rchild = temp->lchild;
-//                 printf("Key %d 삭제 완료\n", key);
-//                 return 1;
-//             }
-//             else {
-//                 parent = temp;
-//                 temp = temp->rchild;
-//             }
-//         }
-//     }
-    
-//     else {
-//         if (temp->rchild != NULL) {
-//             if (parent->lchild->key == key) {
-//                 parent->lchild = temp->rchild;
-//             }
-//             else {
-//                 parent->rchild = temp->rchild;
-//             }
-//             printf("Key %d 삭제 완료\n", key);
-//             return 1;
-//         }
-
-//         if (temp->lchild != NULL) {
-//             if (parent->lchild->key == key) {
-//                 parent->lchild = temp->lchild;
-//             }
-//             else {
-//                 parent->rchild = temp->lchild;
-//             }
-//             printf("Key %d 삭제 완료\n", key);
-//             return 1;
-//         }
-//     }
-// }
 
 treePointer newNode(int key, float value) {
     treePointer temp = (treePointer)malloc(sizeof(node));
